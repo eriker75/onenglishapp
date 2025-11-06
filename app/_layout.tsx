@@ -10,7 +10,23 @@ export default function RootLayout() {
   return (
     <GluestackUIProvider mode="dark">
       <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-        <Stack />
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            animation: "slide_from_right",
+            contentStyle: {
+              backgroundColor: "transparent",
+            },
+          }}
+        >
+          <Stack.Screen
+            name="index"
+            options={{
+              title: "Welcome",
+              headerShown: false,
+            }}
+          />
+        </Stack>
       </SafeAreaProvider>
     </GluestackUIProvider>
   );
