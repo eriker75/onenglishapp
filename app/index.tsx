@@ -1,5 +1,9 @@
-import { Text, View } from "react-native";
+import { Box, Image } from "@/components/ui";
+import { Dimensions, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+const RadarLoginImg = require("@/assets/img/LoginBgImg.png");
+
+const screenHeight = Dimensions.get("window").height;
 
 export default function Index() {
   return (
@@ -11,7 +15,17 @@ export default function Index() {
           alignItems: "center",
         }}
       >
-        <Text>Edit app/index.tsx to edit this screen.</Text>
+        <Box className="items-center justify-center flex-grow max-w-full">
+          <Image
+            source={RadarLoginImg}
+            style={{
+              width: "100%",
+              height: screenHeight * 0.5,
+              maxHeight: 400,
+            }}
+            resizeMode="contain"
+          />
+        </Box>
       </View>
     </SafeAreaView>
   );
