@@ -23,6 +23,14 @@ const HomeScreenView = () => {
     { id: 5, color: "bg-indigo-500" },
   ];
 
+  const leaderboardData = [
+    { id: 1, color: "bg-teal-500" },
+    { id: 2, color: "bg-amber-500" },
+    { id: 3, color: "bg-rose-500" },
+    { id: 4, color: "bg-emerald-500" },
+    { id: 5, color: "bg-violet-500" },
+  ];
+
   const itemWidth = (width - 32) / 3.2;
 
   return (
@@ -34,7 +42,12 @@ const HomeScreenView = () => {
     >
       <HeaderMenu />
       <View className="flex-1 p-4">
-        <ScrollView>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          bounces={true}
+          scrollEventThrottle={16}
+          contentContainerStyle={{ paddingBottom: 20 }}
+        >
           <Text className="text-white text-4xl font-roboto-bold">
             Hi Aaron!
           </Text>
@@ -82,6 +95,22 @@ const HomeScreenView = () => {
                   className={`${item.color} rounded-lg h-32`}
                   style={{ marginRight: 16 }}
                 />
+              )}
+            />
+          </Box>
+
+          <Box className="pb-4">
+            <Text className="text-[#1D286E] pb-2 font-roboto">Leaderboard</Text>
+            <Carousel
+              loop
+              width={width - 32}
+              height={160}
+              autoPlay={false}
+              autoPlayInterval={3000}
+              data={leaderboardData}
+              scrollAnimationDuration={600}
+              renderItem={({ item }) => (
+                <Box className={`${item.color} rounded-lg flex-1 h-60 mx-2`} />
               )}
             />
           </Box>
