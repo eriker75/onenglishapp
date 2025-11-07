@@ -1,6 +1,5 @@
-import { Box } from "@/components/ui";
+import HeaderMenu from "@/components/blocs/HeaderMenu";
 import { LinearGradient } from "expo-linear-gradient";
-import React from "react";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -14,7 +13,7 @@ const HomeScreenView = () => {
         style={{ flex: 1 }}
       >
         <View className="flex-1">
-          <Box className="bg-white p-4 h-12 rounded-br-[40px] rounded-bl-[40px]"></Box>
+          <HeaderMenu />
         </View>
       </LinearGradient>
     </SafeAreaView>
