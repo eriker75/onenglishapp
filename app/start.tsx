@@ -1,4 +1,5 @@
 import { Button, ButtonText, Image } from "@/components/ui";
+import { useRouter } from "expo-router";
 import { Dimensions, ImageBackground, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -9,6 +10,7 @@ const OnEnglishPet = require("@/assets/img/OnEnglishPet.png");
 const WINDOW_HEIGHT = Dimensions.get("window").height;
 
 export default function StartScreen() {
+  const router = useRouter();
   return (
     <ImageBackground
       source={LoginBgImg}
@@ -52,10 +54,13 @@ export default function StartScreen() {
                   variant="solid"
                   action="primary"
                   className="bg-[#2C93FE] rounded-full h-[70px] w-[85%] border-[3px] border-[#2C93FE]"
+                  onPress={() => {
+                    router.push("/welcome/step1");
+                  }}
                 >
-                  <ButtonText className="text-[#303030] text-xl font-roboto-bold">
+                  <Text className="text-[#303030] text-xl font-roboto-bold">
                     Sign in
-                  </ButtonText>
+                  </Text>
                 </Button>
               </View>
             </View>

@@ -69,6 +69,13 @@ export default function RootLayout() {
               headerShown: false,
             }}
           />
+          <Stack.Screen
+            name="welcome"
+            options={{
+              title: "WelcomeSteps",
+              headerShown: false,
+            }}
+          />
         </Stack>
       </SafeAreaProvider>
     </GluestackUIProvider>
