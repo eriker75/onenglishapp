@@ -14,7 +14,7 @@ const HomeScreenView = () => {
         style={{ flex: 1 }}
       >
         <View className="flex-1">
-          <Box className="bg-white p-4 h-16 rounded-br-[40px] rounded-bl-[40px]"></Box>
+          <Box className="bg-white p-4 h-12 rounded-br-[40px] rounded-bl-[40px]"></Box>
         </View>
       </LinearGradient>
     </SafeAreaView>
