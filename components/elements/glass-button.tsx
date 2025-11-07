@@ -1,10 +1,12 @@
 import {
   LiquidGlassView,
   isLiquidGlassSupported,
+  type LiquidGlassViewProps,
 } from "@callstack/liquid-glass";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import {
+  ColorValue,
   Pressable,
   PressableProps,
   StyleProp,
@@ -21,17 +23,21 @@ type GlassButtonProps = {
   className?: string;
   containerStyle?: StyleProp<ViewStyle>;
   effect?: "clear" | "regular" | "none";
+  tintColor?: ColorValue;
+  colorScheme?: LiquidGlassViewProps["colorScheme"];
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
 } & Omit<PressableProps, "onPress" | "style">;
 
 const fallbackGradient = [
-  "rgba(255, 255, 255, 0.65)",
-  "rgba(255, 255, 255, 0.15)",
+  "rgba(142, 197, 252, 0.58)",
+  "rgba(191, 225, 255, 0.26)",
 ];
 
 const GlassButton = React.forwardRef<
   React.ElementRef<typeof Pressable>,
   GlassButtonProps
->(({ label, onPress, disabled, className, textClassName, containerStyle, effect = "clear", ...pressableProps }, ref) => {
+>(({ label, onPress, disabled, className, textClassName, containerStyle, effect = "regular", tintColor, colorScheme = "system", leftIcon, rightIcon, ...pressableProps }, ref) => {
   return (
     <Pressable
       ref={ref}
@@ -44,6 +50,7 @@ const GlassButton = React.forwardRef<
         const containerClassName = ["overflow-hidden", className]
           .filter(Boolean)
           .join(" ");
+        const showFallback = !isLiquidGlassSupported;
 
         return (
           <Box
@@ -56,15 +63,17 @@ const GlassButton = React.forwardRef<
             ])}
           >
             <LiquidGlassView
-              interactive={isLiquidGlassSupported}
+              interactive={isLiquidGlassSupported && !disabled}
               effect={effect}
+              tintColor={tintColor ?? "rgba(152, 197, 255, 0.38)"}
+              colorScheme={colorScheme}
               style={StyleSheet.flatten([
                 styles.glass,
                 pressed && styles.glassPressed,
-                !isLiquidGlassSupported && styles.glassFallback,
+                showFallback && styles.glassFallback,
               ])}
             >
-              {!isLiquidGlassSupported && (
+              {showFallback && (
                 <LinearGradient
                   pointerEvents="none"
                   colors={fallbackGradient}
@@ -73,21 +82,31 @@ const GlassButton = React.forwardRef<
                   style={styles.fallbackOverlay}
                 />
               )}
-              <Box pointerEvents="none" style={styles.highlight} />
-              <Text
-                style={styles.text}
-                className={
-                  [
-                    "text-base font-roboto tracking-tight",
-                    pressed ? "opacity-90" : "opacity-100",
-                    textClassName,
-                  ]
-                    .filter(Boolean)
-                    .join(" ")
-                }
-              >
-                {label}
-              </Text>
+              <Box
+                pointerEvents="none"
+                style={StyleSheet.flatten([
+                  styles.highlight,
+                  pressed && styles.highlightPressed,
+                ])}
+              />
+              <Box style={styles.content}>
+                {leftIcon ? <Box style={styles.iconWrapper}>{leftIcon}</Box> : null}
+                <Text
+                  style={styles.text}
+                  className={
+                    [
+                      "text-base font-roboto tracking-tight",
+                      pressed ? "opacity-90" : "opacity-100",
+                      textClassName,
+                    ]
+                      .filter(Boolean)
+                      .join(" ")
+                  }
+                >
+                  {label}
+                </Text>
+                {rightIcon ? <Box style={styles.iconWrapper}>{rightIcon}</Box> : null}
+              </Box>
             </LiquidGlassView>
           </Box>
         );
@@ -118,14 +137,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     overflow: "hidden",
+    borderCurve: "continuous",
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: "rgba(255, 255, 255, 0.55)",
   },
   glassPressed: {
     opacity: 0.92,
   },
   glassFallback: {
-    backgroundColor: "rgba(255, 255, 255, 0.15)",
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: "rgba(255, 255, 255, 0.35)",
+    backgroundColor: "rgba(152, 197, 255, 0.38)",
   },
   fallbackOverlay: {
     ...StyleSheet.absoluteFillObject,
@@ -141,11 +161,24 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0.4)",
     opacity: 0.35,
   },
+  highlightPressed: {
+    opacity: 0.22,
+  },
+  content: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10,
+  },
+  iconWrapper: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
   text: {
-    color: "#1d1d1f",
-    textShadowColor: "rgba(0,0,0,0.08)",
+    color: "#ffffff",
+    textShadowColor: "rgba(14, 30, 64, 0.35)",
     textShadowOffset: { width: 0, height: 1 },
-    textShadowRadius: 2,
+    textShadowRadius: 3,
   },
   disabled: {
     opacity: 0.6,

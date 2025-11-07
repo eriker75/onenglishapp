@@ -55,7 +55,11 @@ const WelcomeStepScreen1 = () => {
                   <Ionicons name="chevron-forward" size={18} color="#000" />
                 </Box>
               </Button>
-              <GlassButton label="Next" onPress={() => {}} />
+              <GlassButton
+                label="Next"
+                rightIcon={<Ionicons name="arrow-forward" size={16} color="#fff" />}
+                onPress={() => {}}
+              />
             </Box>
           </ImageBackground>
         </Box>
