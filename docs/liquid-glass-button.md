@@ -24,8 +24,8 @@ This document explains how the `GlassButton` component is implemented and how to
 2. We compute `showFallback = !isLiquidGlassSupported`. We do **not** rely on platform checks; the library handles the detection.
 3. The core material is a `LiquidGlassView` with:
    - `interactive` toggled only when supported and not disabled.
-   - `effect` defaulting to `regular` for more pronounced blur.
-   - `tintColor` defaulted to `rgba(152, 197, 255, 0.38)` to match the provided inspiration.
+- `effect` now defaults to `clear` so the native material stays mostly transparent by default.
+- `tintColor` is left undefined on supported iOS devices (so the background shows through). A soft blue tint is only applied when you explicitly pass `tintColor` or when the fallback gradient is used.
    - `colorScheme` customizable; default `system`.
 4. For unsupported environments we layer a `LinearGradient` over the view to mimic the glass tint and keep the same palette.
 5. We add a translucent top highlight and white text/icon with soft shadows to reinforce the glass feel.
@@ -39,7 +39,7 @@ This document explains how the `GlassButton` component is implemented and how to
 
 ### Fallback Strategy
 When `showFallback` is true:
-- Gradient colors defined in `fallbackGradient` maintain a similar luminance to the glass effect.
+- Gradient colors defined in `fallbackGradient` (`rgba(255,255,255,0.55)` → `rgba(255,255,255,0.1)`) keep the element airy instead of overly blue.
 - Keep the highlight and shadow so the control still feels elevated.
 - Avoid setting `interactive` to true; the effect does not animate without native support.
 

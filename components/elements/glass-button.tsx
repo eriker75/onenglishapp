@@ -7,6 +7,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import {
   ColorValue,
+  Platform,
   Pressable,
   PressableProps,
   StyleProp,
@@ -30,14 +31,14 @@ type GlassButtonProps = {
 } & Omit<PressableProps, "onPress" | "style">;
 
 const fallbackGradient = [
-  "rgba(142, 197, 252, 0.58)",
-  "rgba(191, 225, 255, 0.26)",
+  "rgba(255, 255, 255, 0.55)",
+  "rgba(255, 255, 255, 0.1)",
 ];
 
 const GlassButton = React.forwardRef<
   React.ElementRef<typeof Pressable>,
   GlassButtonProps
->(({ label, onPress, disabled, className, textClassName, containerStyle, effect = "regular", tintColor, colorScheme = "system", leftIcon, rightIcon, ...pressableProps }, ref) => {
+>(({ label, onPress, disabled, className, textClassName, containerStyle, effect = "clear", tintColor, colorScheme = "system", leftIcon, rightIcon, ...pressableProps }, ref) => {
   return (
     <Pressable
       ref={ref}
@@ -51,6 +52,12 @@ const GlassButton = React.forwardRef<
           .filter(Boolean)
           .join(" ");
         const showFallback = !isLiquidGlassSupported;
+        const resolvedTintColor =
+          tintColor !== undefined
+            ? tintColor
+            : Platform.OS === "ios" && isLiquidGlassSupported
+              ? undefined
+              : "rgba(176, 208, 255, 0.28)";
 
         return (
           <Box
@@ -65,7 +72,7 @@ const GlassButton = React.forwardRef<
             <LiquidGlassView
               interactive={isLiquidGlassSupported && !disabled}
               effect={effect}
-              tintColor={tintColor ?? "rgba(152, 197, 255, 0.38)"}
+                tintColor={resolvedTintColor}
               colorScheme={colorScheme}
               style={StyleSheet.flatten([
                 styles.glass,
@@ -145,7 +152,9 @@ const styles = StyleSheet.create({
     opacity: 0.92,
   },
   glassFallback: {
-    backgroundColor: "rgba(152, 197, 255, 0.38)",
+    backgroundColor: "rgba(255, 255, 255, 0.16)",
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: "rgba(255, 255, 255, 0.35)",
   },
   fallbackOverlay: {
     ...StyleSheet.absoluteFillObject,
@@ -158,8 +167,8 @@ const styles = StyleSheet.create({
     right: 6,
     height: 18,
     borderRadius: 18,
-    backgroundColor: "rgba(255,255,255,0.4)",
-    opacity: 0.35,
+    backgroundColor: "rgba(255,255,255,0.55)",
+    opacity: 0.32,
   },
   highlightPressed: {
     opacity: 0.22,
