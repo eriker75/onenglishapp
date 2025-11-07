@@ -1,6 +1,12 @@
 import { Tabs } from "expo-router";
 import React from "react";
-import { Image } from "react-native";
+
+// Import SVG icons
+import HomeIcon from "../../assets/svg/HomeIconWhite.svg";
+import OlympicsIcon from "../../assets/svg/OlympicsIconWhite.svg";
+import PracticeIcon from "../../assets/svg/PracticeIconWhite.svg";
+import ProfileIcon from "../../assets/svg/ProfileIconWhite.svg";
+import ScoreIcon from "../../assets/svg/ScoreIconWhite.svg";
 
 export default function DashboardTabLayout() {
   return (
@@ -28,13 +34,10 @@ export default function DashboardTabLayout() {
         options={{
           title: "Home",
           tabBarIcon: ({ focused }) => (
-            <Image
-              source={require("../../assets/icons/HomeIcon.png")}
-              style={{
-                width: 24,
-                height: 24,
-                tintColor: focused ? "#ffffff" : "#8891B0",
-              }}
+            <HomeIcon
+              width={24}
+              height={24}
+              stroke={focused ? "#ffffff" : "#8891B0"}
             />
           ),
         }}
@@ -50,13 +53,10 @@ export default function DashboardTabLayout() {
         options={{
           title: "Olympics",
           tabBarIcon: ({ focused }) => (
-            <Image
-              source={require("../../assets/icons/OlympicIcon.png")}
-              style={{
-                width: 24,
-                height: 24,
-                tintColor: focused ? "#ffffff" : "#8891B0",
-              }}
+            <OlympicsIcon
+              width={24}
+              height={24}
+              stroke={focused ? "#ffffff" : "#8891B0"}
             />
           ),
         }}
@@ -66,13 +66,10 @@ export default function DashboardTabLayout() {
         options={{
           title: "Practice",
           tabBarIcon: ({ focused }) => (
-            <Image
-              source={require("../../assets/icons/PracticeIcon.png")}
-              style={{
-                width: 24,
-                height: 24,
-                tintColor: focused ? "#ffffff" : "#8891B0",
-              }}
+            <PracticeIcon
+              width={24}
+              height={24}
+              stroke={focused ? "#ffffff" : "#8891B0"}
             />
           ),
         }}
@@ -82,13 +79,10 @@ export default function DashboardTabLayout() {
         options={{
           title: "Score",
           tabBarIcon: ({ focused }) => (
-            <Image
-              source={require("../../assets/icons/ScoreIcon.png")}
-              style={{
-                width: 24,
-                height: 24,
-                tintColor: focused ? "#ffffff" : "#8891B0",
-              }}
+            <ScoreIcon
+              width={24}
+              height={24}
+              stroke={focused ? "#ffffff" : "#8891B0"}
             />
           ),
         }}
@@ -98,13 +92,10 @@ export default function DashboardTabLayout() {
         options={{
           title: "Profile",
           tabBarIcon: ({ focused }) => (
-            <Image
-              source={require("../../assets/icons/ProfileIcon.png")}
-              style={{
-                width: 24,
-                height: 24,
-                tintColor: focused ? "#ffffff" : "#8891B0",
-              }}
+            <ProfileIcon
+              width={24}
+              height={24}
+              stroke={focused ? "#ffffff" : "#8891B0"}
             />
           ),
         }}
