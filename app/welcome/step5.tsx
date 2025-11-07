@@ -16,7 +16,7 @@ const WelcomeStepScreen5 = () => {
       ringAlt="Olympic Ring 5"
       onBack={() => router.back()}
       onSkip={() => router.replace("/start")}
-      onNext={() => router.push("/dashboard")}
+      onNext={() => router.replace("/dashboard")}
       nextLabel="Comenzar"
     />
   );

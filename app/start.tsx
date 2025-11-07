@@ -55,7 +55,7 @@ export default function StartScreen() {
                   action="primary"
                   className="bg-[#2C93FE] rounded-full h-[70px] w-[85%] border-[3px] border-[#2C93FE]"
                   onPress={() => {
-                    router.push("/welcome/step1");
+                    router.replace("/welcome/step1");
                   }}
                 >
                   <Text className="text-[#303030] text-xl font-roboto-bold">
