@@ -5,6 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import NoiseGradient1 from "@/assets/img/noisegradients/NoiseGradient1.png";
 import OlympicRing1 from "@/assets/img/olympicrings/ring1.png";
+import { GlassButton } from "@/components/elements";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 
@@ -54,9 +55,7 @@ const WelcomeStepScreen1 = () => {
                   <Ionicons name="chevron-forward" size={18} color="#000" />
                 </Box>
               </Button>
-              <Button className="px-6">
-                <Text className="text-white font-roboto">Next</Text>
-              </Button>
+              <GlassButton label="Next" onPress={() => {}} />
             </Box>
           </ImageBackground>
         </Box>
