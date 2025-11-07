@@ -62,6 +62,13 @@ export default function RootLayout() {
               headerShown: false,
             }}
           />
+          <Stack.Screen
+            name="start"
+            options={{
+              title: "Start",
+              headerShown: false,
+            }}
+          />
         </Stack>
       </SafeAreaProvider>
     </GluestackUIProvider>
