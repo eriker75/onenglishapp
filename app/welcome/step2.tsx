@@ -1,12 +1,23 @@
-import { Text } from "@/components/ui";
+import NoiseGradient2 from "@/assets/img/noisegradients/NoiseGradient2.png";
+import OlympicRing2 from "@/assets/img/olympicrings/ring2.png";
+import { useRouter } from "expo-router";
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { WelcomeStep } from "./components/WelcomeStep";
 
 const WelcomeStepScreen2 = () => {
+  const router = useRouter();
+
   return (
-    <SafeAreaView className="bg-[#1D286E]">
-      <Text>ELEMENTO 2</Text>
-    </SafeAreaView>
+    <WelcomeStep
+      backgroundImage={NoiseGradient2}
+      ringImage={OlympicRing2}
+      title="Forma tu equipo"
+      subtitle="Elige a tus compañeros y compitan juntos en desafíos temáticos de ciencias y deporte."
+      ringAlt="Olympic Ring 2"
+      onBack={() => router.back()}
+      onSkip={() => router.replace("/start")}
+      onNext={() => router.push("/welcome/step3")}
+    />
   );
 };
 

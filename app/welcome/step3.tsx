@@ -1,12 +1,23 @@
-import { Text } from "@/components/ui";
+import NoiseGradient3 from "@/assets/img/noisegradients/NoiseGradient3.png";
+import OlympicRing3 from "@/assets/img/olympicrings/ring3.png";
+import { useRouter } from "expo-router";
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { WelcomeStep } from "./components/WelcomeStep";
 
 const WelcomeStepScreen3 = () => {
+  const router = useRouter();
+
   return (
-    <SafeAreaView className="bg-[#1D286E]">
-      <Text>ELEMENTO 3</Text>
-    </SafeAreaView>
+    <WelcomeStep
+      backgroundImage={NoiseGradient3}
+      ringImage={OlympicRing3}
+      title="Entrena día a día"
+      subtitle="Sigue tu progreso con retos diarios y recibe retroalimentación inmediata de tu entrenador."
+      ringAlt="Olympic Ring 3"
+      onBack={() => router.back()}
+      onSkip={() => router.replace("/start")}
+      onNext={() => router.push("/welcome/step4")}
+    />
   );
 };
 

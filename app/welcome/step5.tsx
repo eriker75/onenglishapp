@@ -1,12 +1,24 @@
-import { Text } from "@/components/ui";
+import NoiseGradient5 from "@/assets/img/noisegradients/NoiseGradient5.png";
+import OlympicRing5 from "@/assets/img/olympicrings/ring5.png";
+import { useRouter } from "expo-router";
 import React from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { WelcomeStep } from "./components/WelcomeStep";
 
 const WelcomeStepScreen5 = () => {
+  const router = useRouter();
+
   return (
-    <SafeAreaView className="bg-[#1D286E]">
-      <Text>ELEMENTO 5</Text>
-    </SafeAreaView>
+    <WelcomeStep
+      backgroundImage={NoiseGradient5}
+      ringImage={OlympicRing5}
+      title="¿Listo para competir?"
+      subtitle="Da el siguiente paso, crea tu perfil y comienza a vivir la experiencia BioLympics."
+      ringAlt="Olympic Ring 5"
+      onBack={() => router.back()}
+      onSkip={() => router.replace("/start")}
+      onNext={() => router.push("/registration/basicInfo")}
+      nextLabel="Comenzar"
+    />
   );
 };
 
