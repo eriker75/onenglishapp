@@ -1,3 +1,5 @@
+import Sidebar from "@/components/blocs/Sidebar";
+import { SidebarProvider, useSidebar } from "@/contexts/SidebarContext";
 import { Tabs } from "expo-router";
 import React from "react";
 import { View } from "react-native";
@@ -10,14 +12,17 @@ import PracticeIcon from "../../assets/svg/PracticeIconWhite.svg";
 import ProfileIcon from "../../assets/svg/ProfileIconWhite.svg";
 import ScoreIcon from "../../assets/svg/ScoreIconWhite.svg";
 
-export default function DashboardTabLayout() {
+function DashboardTabContent() {
+  const { isSidebarOpen, closeSidebar } = useSidebar();
+
   return (
-    <View style={{ flex: 1 }}>
-      <SafeAreaView
-        style={{ flex: 0, backgroundColor: "#ffffff" }}
-        edges={["top"]}
-      />
-      <View style={{ flex: 1, backgroundColor: "#ffffff" }}>
+    <>
+      <View style={{ flex: 1 }}>
+        <SafeAreaView
+          style={{ flex: 0, backgroundColor: "#ffffff" }}
+          edges={["top"]}
+        />
+        <View style={{ flex: 1, backgroundColor: "#ffffff" }}>
         <Tabs
           screenOptions={{
             headerShown: false,
@@ -118,5 +123,15 @@ export default function DashboardTabLayout() {
         edges={["bottom"]}
       />
     </View>
+    <Sidebar visible={isSidebarOpen} onClose={closeSidebar} />
+    </>
+  );
+}
+
+export default function DashboardTabLayout() {
+  return (
+    <SidebarProvider>
+      <DashboardTabContent />
+    </SidebarProvider>
   );
 }
